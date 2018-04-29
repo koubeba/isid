@@ -9,8 +9,11 @@
 
 
 int main() {
+
+	// construct the renderManager. There should only be one renderManager per window.
+	RenderManager renderManager = RenderManager();
 	// construct the gameManager. There will only be this one instance during the execution of this program
-	GameManager gameManager = GameManager();
+	GameManager gameManager = GameManager(&renderManager);
 	
 	sf::RenderWindow window(sf::VideoMode(WINDOW_L, WINDOW_H), "GAMEEEE");
 
