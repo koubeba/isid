@@ -7,7 +7,8 @@
 
 class RenderManager {
 public:
-	void render(std::vector<RenderedObject*>& objects, sf::RenderWindow window);
+	void render(RenderedObject& renderedObject, sf::RenderWindow& window); 
+	void render(std::vector<RenderedObject*>& objects, sf::RenderWindow& window);
 };
 
 #endif

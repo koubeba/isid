@@ -8,6 +8,8 @@
 class RenderedObject {
 	sf::Sprite* sprite;
 public:
+	RenderedObject();
+	RenderedObject(sf::Sprite* sprite);
 	void render(sf::RenderWindow& window);	
 };
 

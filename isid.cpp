@@ -7,14 +7,18 @@
 #define WINDOW_L 800
 #define WINDOW_H 600
 
+#define SPRITES_PATH "sprites.json"
 
 int main() {
 
 	// construct the renderManager. There should only be one renderManager per window.
 	RenderManager renderManager = RenderManager();
+
+	FileManager fileManager = FileManager();
+	fileManager.readRenderedObject(SPRITES_PATH);
 	// construct the gameManager. There will only be this one instance during the execution of this program
-	GameManager gameManager = GameManager(&renderManager);
-	
+	GameManager gameManager = GameManager(&renderManager, &fileManager);
+	gameManager.initPlayer();
 	sf::RenderWindow window(sf::VideoMode(WINDOW_L, WINDOW_H), "GAMEEEE");
 
 	// game loop: the program runs as long as the window is open
@@ -30,7 +34,7 @@ int main() {
 		window.clear(sf::Color::Black);
 		
 		// here we will draw everything
-		// gameManager.loop(&window);
+		gameManager.loop(window);
 		
 		window.display();
 
