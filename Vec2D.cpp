@@ -17,3 +17,13 @@ Vec2D Vec2D::operator+(Vec2D other) {
 Vec2D Vec2D::operator%(Vec2D other) {
 	return Vec2D(this->x % other.x, this->y % other.y);
 }
+
+Vec2D Vec2D::operator*(Vec2D other) {
+	return Vec2D(this->x*other.x, this->y*other.y);
+}
+
+Vec2D Vec2D::operator/(Vec2D other) {
+	if (other.x != 0 || other.y != 0)
+		return Vec2D(this->x/other.x, this->y/other.y);
+	return other;
+}

@@ -7,6 +7,8 @@ RenderedObject::RenderedObject(sf::Sprite*_sprite) {
 }
 
 void RenderedObject::render(sf::RenderWindow& window) {
+	Vec2D windowPosition = GridMap::toWindowCoords(position);
+	sprite->setPosition(windowPosition.x, windowPosition.y);
 	window.draw(*sprite);
 }
 

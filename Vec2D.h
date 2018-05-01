@@ -10,6 +10,8 @@ public:
 	
 	Vec2D operator+(Vec2D other);
 	Vec2D operator%(Vec2D other);
+	Vec2D operator*(Vec2D other);
+	Vec2D operator/(Vec2D other);
 };
 
 #endif

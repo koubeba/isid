@@ -5,7 +5,10 @@ all: isid
 Vec2D.o: Vec2D.h Vec2D.cpp
 	g++ -c "Vec2D.cpp" -o Vec2D.o
 
-RenderedObject.o: Vec2D.h RenderedObject.h RenderedObject.cpp
+GridMap.o: Vec2D.h GridMap.h GridMap.cpp
+	g++ -c "GridMap.cpp" -o GridMap.o
+
+RenderedObject.o: GridMap.h RenderedObject.h RenderedObject.cpp
 	g++ -c "RenderedObject.cpp" -o RenderedObject.o
 
 FileManager.o: RenderedObject.h FileManager.h FileManager.cpp
@@ -13,9 +16,6 @@ FileManager.o: RenderedObject.h FileManager.h FileManager.cpp
 
 RenderManager.o: RenderedObject.h RenderManager.h RenderManager.cpp
 	g++ -c "RenderManager.cpp" -o RenderManager.o
-
-GridMap.o: Vec2D.h GridMap.h GridMap.cpp
-	g++ -c "GridMap.cpp" -o GridMap.o
 
 GameManager.o: RenderedObject.h RenderManager.h FileManager.h GameManager.h GameManager.cpp
 	g++ -c "GameManager.cpp" -o GameManager.o

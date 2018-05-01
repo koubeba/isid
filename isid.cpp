@@ -20,6 +20,7 @@ int main() {
 	GameManager gameManager = GameManager(&renderManager, &fileManager);
 	gameManager.initPlayer();
 	sf::RenderWindow window(sf::VideoMode(WINDOW_L, WINDOW_H), "GAMEEEE");
+	window.setKeyRepeatEnabled(false);
 
 	// game loop: the program runs as long as the window is open
 	while (window.isOpen()) {
