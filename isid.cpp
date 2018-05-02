@@ -29,6 +29,8 @@ int main() {
 		while (window.pollEvent(event)) {
 			// close the window on close request
 			if (event.type == sf::Event::Closed) window.close();
+			// receive user input
+			gameManager.receiveUserInput(event);
 		}
 		
 		// clear the window with black color

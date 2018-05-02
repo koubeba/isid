@@ -6,7 +6,7 @@
 #include "FileManager.h"
 
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Window.hpp>
 #include <vector>
 
 #include <iostream>
@@ -19,6 +19,9 @@ class GameManager {
 	RenderManager* renderManager;
 	FileManager* fileManager;
 
+	sf::Clock userInputTime;
+	int userInputInterval;
+
 	RenderedObject player;
 
 	// trzeba zrobic tu referencje const
@@ -29,7 +32,7 @@ class GameManager {
 	
 	void initPlayer();
 
-	void receiveUserInput();
+	void receiveUserInput(sf::Event event);
 
 	GameState getGameState();
 	void setGameState(GameState _gameState);
