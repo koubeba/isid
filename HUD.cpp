@@ -6,6 +6,8 @@ HUD::HUD(RenderedObject* mB, RenderedObject* hB, RenderedObject* tB) {
 	toolBar = tB;
 }
 
-public void HUD::render(sf::RenderWindow& window) {
-	// draw shit
+void HUD::render(sf::RenderWindow& window) {
+	manaBar->render(window);
+	healthBar->render(window);
+	toolBar->render(window);
 }

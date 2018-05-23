@@ -20,6 +20,16 @@ void GameManager::initPlayer() {
 	player = RenderedObject(fileManager->getSprite("player"));
 }
 
+void GameManager::initHUD() {
+	RenderedObject* mB;
+	RenderedObject* hB;
+	RenderedObject* tB;
+	mB = new RenderedObject(fileManager->getSprite("manabar"));
+	hB = new RenderedObject(fileManager->getSprite("healthbar"));
+	tB = new RenderedObject(fileManager->getSprite("toolbar"));
+	hud = new HUD(mB, hB, tB);
+}
+
 void GameManager::receiveUserInput(sf::Event event) {
 	if (userInputTime.getElapsedTime().asMilliseconds() >= userInputInterval) {
 		

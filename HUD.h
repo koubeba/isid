@@ -5,10 +5,11 @@
 #include "RenderedObject.h"
 
 class HUD {
-	RenderedObject* manaBar, healthBar, toolBar;
+	RenderedObject *manaBar, *healthBar, *toolBar;
 	
+public:
 	HUD(RenderedObject* mB, RenderedObject* hB, RenderedObject* tB);
-	public void render(sf::RenderWindow& window);
-}
+	void render(sf::RenderWindow& window);
+};
 
 #endif

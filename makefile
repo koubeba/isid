@@ -20,15 +20,15 @@ HUD.o: RenderedObject.h HUD.h HUD.cpp
 RenderManager.o: RenderedObject.h RenderManager.h RenderManager.cpp
 	g++ -c "RenderManager.cpp" -o RenderManager.o
 
-GameManager.o: RenderedObject.h RenderManager.h FileManager.h GameManager.h GameManager.cpp
+GameManager.o: RenderedObject.h HUD.h RenderManager.h FileManager.h GameManager.h GameManager.cpp
 	g++ -c "GameManager.cpp" -o GameManager.o
 
 isid.o: GameManager.h isid.cpp
 	g++ -c "isid.cpp" -o isid.o
 	
-isid: Vec2D.o RenderedObject.o FileManager.o RenderManager.o GridMap.o GameManager.o isid.o
+isid: Vec2D.o RenderedObject.o FileManager.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
 	@echo "Building the game"
-	g++ -o isid Vec2D.o RenderedObject.o FileManager.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
+	g++ -o isid Vec2D.o RenderedObject.o FileManager.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
 
 clean:
 	@echo "Removing object files and executable"

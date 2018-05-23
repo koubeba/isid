@@ -4,6 +4,7 @@
 #include "RenderedObject.h"
 #include "RenderManager.h"
 #include "FileManager.h"
+#include "HUD.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -23,6 +24,7 @@ class GameManager {
 	int userInputInterval;
 
 	RenderedObject player;
+	HUD* hud;
 
 	// trzeba zrobic tu referencje const
 	void renderPlayer(sf::RenderWindow& _window);
@@ -30,7 +32,9 @@ class GameManager {
 	public:
 	GameManager(RenderManager* _renderManager, FileManager* _fileManager); //POMYSLEC: Czy gameManager ma byc singletonem albo klasa statyczna?
 	
+	// funkcje inicjalizujace 
 	void initPlayer();
+	void initHUD();
 
 	void receiveUserInput(sf::Event event);
 
