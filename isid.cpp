@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "GameManager.h"
+#include "TiledMap.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -19,6 +20,12 @@ int main() {
 	// construct the gameManager. There will only be this one instance during the execution of this program
 	GameManager gameManager = GameManager(&renderManager, &fileManager);
 	gameManager.initPlayer();
+
+	TiledMap map = TiledMap();
+	fileManager.loadBiomeSprites("grassland.json");
+	map.generate("grassland.json");
+	map.load(gameManager);
+
 	sf::RenderWindow window(sf::VideoMode(WINDOW_L, WINDOW_H), "GAMEEEE");
 	window.setKeyRepeatEnabled(false);
 
@@ -37,8 +44,8 @@ int main() {
 		window.clear(sf::Color::Black);
 		
 		// here we will draw everything
-		gameManager.loop(window);
-		
+		map.render(window);
+		gameManager.loop(window);		
 		window.display();
 
 	}

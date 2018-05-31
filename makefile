@@ -1,6 +1,13 @@
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp
 
+friends: isid
 all: isid
+
+Tile.o: Tile.h Tile.cpp
+	g++ -c "Tile.cpp" -o Tile.o
+
+TiledMap.o: Tile.h Vec2D.h GameManager.h TiledMap.h TiledMap.cpp
+	g++ -c "TiledMap.cpp" -o TiledMap.o
 
 Vec2D.o: Vec2D.h Vec2D.cpp
 	g++ -c "Vec2D.cpp" -o Vec2D.o
@@ -20,15 +27,15 @@ HUD.o: RenderedObject.h HUD.h HUD.cpp
 RenderManager.o: RenderedObject.h RenderManager.h RenderManager.cpp
 	g++ -c "RenderManager.cpp" -o RenderManager.o
 
-GameManager.o: RenderedObject.h HUD.h RenderManager.h FileManager.h GameManager.h GameManager.cpp
+GameManager.o: TiledMap.h RenderedObject.h HUD.h RenderManager.h FileManager.h GameManager.h GameManager.cpp
 	g++ -c "GameManager.cpp" -o GameManager.o
 
 isid.o: GameManager.h isid.cpp
 	g++ -c "isid.cpp" -o isid.o
 	
-isid: Vec2D.o RenderedObject.o FileManager.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
+isid: Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
 	@echo "Building the game"
-	g++ -o isid Vec2D.o RenderedObject.o FileManager.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
+	g++ -o isid Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
 
 clean:
 	@echo "Removing object files and executable"

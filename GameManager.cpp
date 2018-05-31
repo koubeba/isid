@@ -45,6 +45,10 @@ void GameManager::receiveUserInput(sf::Event event) {
 	}
 }
 
+sf::Sprite* GameManager::getSprite(std::string name){
+	return fileManager->getSprite(name);
+}
+
 GameState GameManager::getGameState() {
 	return this->gameState;
 
@@ -55,6 +59,7 @@ void GameManager::setGameState(GameState _gameState) {
 }
 
 void GameManager::loop(sf::RenderWindow& _window) {
+	
 	renderPlayer(_window);
 	
 }

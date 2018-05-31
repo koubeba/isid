@@ -22,6 +22,7 @@ class FileManager {
 public:
 	FileManager();
 	RenderedObject* readRenderedObject(const char* filename);
+	void loadBiomeSprites(const char* _biome);
 	sf::Sprite* getSprite(std::string name);
 };
 
