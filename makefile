@@ -6,7 +6,7 @@ all: isid
 Tile.o: Tile.h Tile.cpp
 	g++ -c "Tile.cpp" -o Tile.o
 
-TiledMap.o: Tile.h Vec2D.h GameManager.h TiledMap.h TiledMap.cpp
+TiledMap.o: Tile.h Vec2D.h FileManager.h TiledMap.h TiledMap.cpp
 	g++ -c "TiledMap.cpp" -o TiledMap.o
 
 Vec2D.o: Vec2D.h Vec2D.cpp

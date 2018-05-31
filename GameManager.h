@@ -5,6 +5,7 @@
 #include "RenderManager.h"
 #include "FileManager.h"
 #include "HUD.h"
+#include "TiledMap.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -23,6 +24,7 @@ class GameManager {
 	sf::Clock userInputTime;
 	int userInputInterval;
 
+	TiledMap map;
 	RenderedObject player;
 	HUD* hud;
 
@@ -35,6 +37,7 @@ class GameManager {
 	// funkcje inicjalizujace 
 	void initPlayer();
 	void initHUD();
+	void loadBiome(const char* biome);	
 
 	void receiveUserInput(sf::Event event);
 

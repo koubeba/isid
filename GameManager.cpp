@@ -20,6 +20,12 @@ void GameManager::initPlayer() {
 	player = RenderedObject(fileManager->getSprite("player"));
 }
 
+void GameManager::loadBiome(const char* biome){
+	fileManager->loadBiomeSprites(biome);
+	map.generate(biome);
+	map.load(*fileManager);
+}
+
 void GameManager::initHUD() {
 	RenderedObject* mB;
 	RenderedObject* hB;
@@ -59,7 +65,7 @@ void GameManager::setGameState(GameState _gameState) {
 }
 
 void GameManager::loop(sf::RenderWindow& _window) {
-	
+	map.render(_window);
 	renderPlayer(_window);
 	
 }

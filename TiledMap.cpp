@@ -8,7 +8,7 @@ TiledMap::TiledMap(){
     }
 }
 
-void TiledMap::load(GameManager& gameManager){
+void TiledMap::load(FileManager& fileManager){
     Vec2D size = GridMap::getSize();
     std::string type_name;
     for(int i=0; i<size.x; i++){
@@ -29,7 +29,7 @@ void TiledMap::load(GameManager& gameManager){
                     type_name = "chest";
                     break;
             }
-            tiles[i][j].loadSprite(gameManager.getSprite( type_name ));
+            tiles[i][j].loadSprite(fileManager.getSprite( type_name ));
         }
     }
 }

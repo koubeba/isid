@@ -3,7 +3,7 @@
 
 #include "Tile.h"
 #include "Vec2D.h"
-#include "GameManager.h"
+#include "FileManager.h"
 
 #include <jsoncpp/json/json.h>
 #include <fstream>
@@ -14,7 +14,7 @@ class TiledMap {
 public:
     TiledMap();
     void generate(const char* biome);
-    void load(GameManager& gameManager);
+    void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);
 };
 
