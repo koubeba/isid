@@ -13,6 +13,7 @@ class TiledMap {
     Tile** tiles;
 public:
     TiledMap();
+    TileType getTileType(int x, int y);
     void generate(const char* biome);
     void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);

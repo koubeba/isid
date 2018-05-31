@@ -38,15 +38,24 @@ void GameManager::initHUD() {
 
 void GameManager::receiveUserInput(sf::Event event) {
 	if (userInputTime.getElapsedTime().asMilliseconds() >= userInputInterval) {
-		
-		if (event.key.code == sf::Keyboard::D) 
-			player.setPosition(player.getPosition() + Vec2D(1, 0));
-		else if (event.key.code == sf::Keyboard::A)
-			player.setPosition(player.getPosition() + Vec2D(-1, 0));
-		else if (event.key.code == sf::Keyboard::W)
-			player.setPosition(player.getPosition() + Vec2D(0, -1));
-		else if (event.key.code == sf::Keyboard::S)
-			player.setPosition(player.getPosition() + Vec2D(0, 1));
+		Vec2D player_position = player.getPosition();
+
+		if (event.key.code == sf::Keyboard::D) {
+			if( map.getTileType(player_position.x + 1, player_position.y) == FLOOR )
+				player.setPosition(player_position + Vec2D(1, 0));
+		}
+		else if (event.key.code == sf::Keyboard::A){
+			if( map.getTileType(player_position.x - 1, player_position.y) == FLOOR )
+				player.setPosition(player_position + Vec2D(-1, 0));
+		}
+		else if (event.key.code == sf::Keyboard::W){
+			if( map.getTileType(player_position.x, player_position.y - 1) == FLOOR )
+				player.setPosition(player_position + Vec2D(0, -1));
+		}
+		else if (event.key.code == sf::Keyboard::S){
+			if( map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
+				player.setPosition(player_position + Vec2D(0, 1));
+		}
 		userInputTime.restart();
 	}
 }

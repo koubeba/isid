@@ -8,6 +8,10 @@ TiledMap::TiledMap(){
     }
 }
 
+TileType TiledMap::getTileType(int x, int y){
+    return tiles[x][y].getTileType();
+}
+
 void TiledMap::load(FileManager& fileManager){
     Vec2D size = GridMap::getSize();
     std::string type_name;
