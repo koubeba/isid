@@ -1,6 +1,6 @@
 #include "GridMap.h"
 
-Vec2D GridMap::size = Vec2D(48, 27);
+Vec2D GridMap::size = Vec2D(20, 15);
 Vec2D GridMap::tileSize = Vec2D(40, 40);
 
 void GridMap::setSize(Vec2D _size) {
