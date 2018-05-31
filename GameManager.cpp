@@ -41,19 +41,19 @@ void GameManager::receiveUserInput(sf::Event event) {
 		Vec2D player_position = player.getPosition();
 
 		if (event.key.code == sf::Keyboard::D) {
-			if( map.getTileType(player_position.x + 1, player_position.y) == FLOOR )
+			if( player_position.x + 1 < GridMap::getSize().x && map.getTileType(player_position.x + 1, player_position.y) == FLOOR )
 				player.setPosition(player_position + Vec2D(1, 0));
 		}
 		else if (event.key.code == sf::Keyboard::A){
-			if( map.getTileType(player_position.x - 1, player_position.y) == FLOOR )
+			if( player_position.x > 0 && map.getTileType(player_position.x - 1, player_position.y) == FLOOR )
 				player.setPosition(player_position + Vec2D(-1, 0));
 		}
 		else if (event.key.code == sf::Keyboard::W){
-			if( map.getTileType(player_position.x, player_position.y - 1) == FLOOR )
+			if( player_position.y > 0 && map.getTileType(player_position.x, player_position.y - 1) == FLOOR )
 				player.setPosition(player_position + Vec2D(0, -1));
 		}
 		else if (event.key.code == sf::Keyboard::S){
-			if( map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
+			if(player_position.y + 1 < GridMap::getSize().y && map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
 				player.setPosition(player_position + Vec2D(0, 1));
 		}
 		userInputTime.restart();
