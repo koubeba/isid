@@ -38,6 +38,8 @@ class GameManager {
 
 	void receiveUserInput(sf::Event event);
 
+	sf::Sprite* getSprite(std::string name);
+
 	GameState getGameState();
 	void setGameState(GameState _gameState);
 

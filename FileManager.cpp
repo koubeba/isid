@@ -22,12 +22,26 @@ RenderedObject* FileManager::readRenderedObject(const char* filename) {
 	tex->loadFromFile(obj["player"].asString());
 
 	sprites.insert(std::pair<std::string, sf::Texture*>("player", tex));
-	
-	//sprites.add(std::pair<std::string);
 
 
 	return NULL;
-}	
+}
+
+void FileManager::loadBiomeSprites(const char* _biome){
+	std::ifstream ifs(_biome);
+	Json::Reader reader;
+	Json::Value biome;
+	reader.parse(ifs, biome);
+	const Json::Value& new_sprites = biome["sprites"];
+
+	sf::Texture* tex;
+	for (int i=0; i<sprites.size(); i++){
+		tex = new sf::Texture();
+		tex->loadFromFile(new_sprites[i]["path"].asString());
+		sprites.erase(new_sprites[i]["name"].asString());
+		sprites.insert(std::pair<std::string, sf::Texture*>(new_sprites[i]["name"].asString(), tex));
+	}
+}
 
 sf::Sprite* FileManager::getSprite(std::string name) {
 	// if (sprites.empty())
