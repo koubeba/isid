@@ -70,8 +70,8 @@ void GameManager::receiveUserInput(sf::Event event) {
 			if(player_position.y + 1 < GridMap::getSize().y && map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
 				player.move(DOWN);
 		}
-		else if(event.key.code == sf::Keyboard::O){ player.takeDamage(7); }
-		else if(event.key.code == sf::Keyboard::P){ player.drainMana(7); }
+		else if(event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
+		else if(event.key.code == sf::Keyboard::P){ player.drainMana(10); }
 		userInputTime.restart();
 	}
 	
