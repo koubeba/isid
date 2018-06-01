@@ -6,6 +6,7 @@
 #include "FileManager.h"
 #include "HUD.h"
 #include "TiledMap.h"
+#include "Player.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -25,7 +26,7 @@ class GameManager {
 	int userInputInterval;
 
 	TiledMap map;
-	RenderedObject player;
+	Player player;
 	HUD* hud;
 
 	// trzeba zrobic tu referencje const

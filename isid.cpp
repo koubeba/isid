@@ -31,6 +31,7 @@ int main() {
 		sf::Event event;
 		// check all the window's events
 		while (window.pollEvent(event)) {
+			if( (event.type >= 7 && event.type <= 13) || event.type == sf::Event::LostFocus || event.type == sf::Event::GainedFocus ) continue;
 			// close the window on close request
 			if (event.type == sf::Event::Closed) window.close();
 			// receive user input

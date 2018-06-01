@@ -17,7 +17,7 @@ GameManager::GameManager(RenderManager* _renderManager, FileManager* _fileManage
 }
 
 void GameManager::initPlayer() {
-	player = RenderedObject(fileManager->getSprite("player"));
+	player = Player( fileManager->getSprite("player") );
 }
 
 void GameManager::loadBiome(const char* biome){
@@ -51,23 +51,30 @@ void GameManager::receiveUserInput(sf::Event event) {
 		Vec2D player_position = player.getPosition();
 
 		if (event.key.code == sf::Keyboard::D) {
+			player.setDirection(RIGHT);
 			if( player_position.x + 1 < GridMap::getSize().x && map.getTileType(player_position.x + 1, player_position.y) == FLOOR )
-				player.setPosition(player_position + Vec2D(1, 0));
+				player.move(RIGHT);
 		}
 		else if (event.key.code == sf::Keyboard::A){
+			player.setDirection(LEFT);
 			if( player_position.x > 0 && map.getTileType(player_position.x - 1, player_position.y) == FLOOR )
-				player.setPosition(player_position + Vec2D(-1, 0));
+				player.move(LEFT);
 		}
 		else if (event.key.code == sf::Keyboard::W){
+			player.setDirection(UP);
 			if( player_position.y > 0 && map.getTileType(player_position.x, player_position.y - 1) == FLOOR )
-				player.setPosition(player_position + Vec2D(0, -1));
+				player.move(UP);
 		}
 		else if (event.key.code == sf::Keyboard::S){
+			player.setDirection(DOWN);
 			if(player_position.y + 1 < GridMap::getSize().y && map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
-				player.setPosition(player_position + Vec2D(0, 1));
+				player.move(DOWN);
 		}
 		userInputTime.restart();
 	}
+
+	if(event.key.code == sf::Keyboard::O){ player.takeDamage(7); }
+	if(event.key.code == sf::Keyboard::P){ player.drainMana(7); }
 }
 
 sf::Sprite* GameManager::getSprite(std::string name){
@@ -84,6 +91,8 @@ void GameManager::setGameState(GameState _gameState) {
 }
 
 void GameManager::loop(sf::RenderWindow& _window) {
+	player.update();
+
 	map.render(_window);
 	renderPlayer(_window);
 	hud->render(_window);	
