@@ -15,8 +15,16 @@ void Pawn::takeDamage(int damage){
     health -= damage;
 }
 
+int Pawn::getHealth(){
+    return health;
+}
+
 void Pawn::drainMana(int amount){
     mana -= amount;
+}
+
+int Pawn::getMana(){
+    return mana;
 }
 
 void Pawn::move(Direction dir){

@@ -16,6 +16,9 @@ public:
     Pawn(sf::Sprite* sprite);
     void takeDamage(int damage);
     void drainMana(int amount);
+    int getHealth();
+    int getMana();
+
     void move(Direction);
 
     Direction getDirection();

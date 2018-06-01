@@ -70,11 +70,11 @@ void GameManager::receiveUserInput(sf::Event event) {
 			if(player_position.y + 1 < GridMap::getSize().y && map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
 				player.move(DOWN);
 		}
+		else if(event.key.code == sf::Keyboard::O){ player.takeDamage(7); }
+		else if(event.key.code == sf::Keyboard::P){ player.drainMana(7); }
 		userInputTime.restart();
 	}
-
-	if(event.key.code == sf::Keyboard::O){ player.takeDamage(7); }
-	if(event.key.code == sf::Keyboard::P){ player.drainMana(7); }
+	
 }
 
 sf::Sprite* GameManager::getSprite(std::string name){
@@ -92,8 +92,9 @@ void GameManager::setGameState(GameState _gameState) {
 
 void GameManager::loop(sf::RenderWindow& _window) {
 	player.update();
+	hud->update(player);
 
 	map.render(_window);
 	renderPlayer(_window);
-	hud->render(_window);	
+	hud->render(_window);
 }
