@@ -3,10 +3,6 @@
 #include "GameManager.h"
 
 
-void GameManager::renderPlayer(sf::RenderWindow& _window) {
-	renderManager->render(player, _window);
-}
-
 
 GameManager::GameManager(RenderManager* _renderManager, FileManager* _fileManager) {
 	this->gameState = MENU;
@@ -95,6 +91,6 @@ void GameManager::loop(sf::RenderWindow& _window) {
 	hud->update(player);
 
 	map.render(_window);
-	renderPlayer(_window);
+	player.render(_window);
 	hud->render(_window);
 }

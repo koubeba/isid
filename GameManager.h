@@ -29,9 +29,6 @@ class GameManager {
 	Player player;
 	HUD* hud;
 
-	// trzeba zrobic tu referencje const
-	void renderPlayer(sf::RenderWindow& _window);
-
 	public:
 	GameManager(RenderManager* _renderManager, FileManager* _fileManager); //POMYSLEC: Czy gameManager ma byc singletonem albo klasa statyczna?
 	
