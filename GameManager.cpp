@@ -14,6 +14,7 @@ GameManager::GameManager(RenderManager* _renderManager, FileManager* _fileManage
 
 void GameManager::initPlayer() {
 	player = Player( fileManager->getSprite("player") );
+	player.setPosition( Vec2D(0, 3) );
 }
 
 void GameManager::loadBiome(const char* biome){
