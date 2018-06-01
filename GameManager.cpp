@@ -27,12 +27,22 @@ void GameManager::loadBiome(const char* biome){
 }
 
 void GameManager::initHUD() {
-	RenderedObject* mB;
-	RenderedObject* hB;
-	RenderedObject* tB;
-	mB = new RenderedObject(fileManager->getSprite("manabar"));
-	hB = new RenderedObject(fileManager->getSprite("healthbar"));
-	tB = new RenderedObject(fileManager->getSprite("toolbar"));
+	HUDElement* mB;
+	HUDElement* hB;
+	HUDElement* tB;
+
+	hB = new HUDElement( fileManager->getSprite("healthbar") );
+	mB = new HUDElement( fileManager->getSprite("manabar") );
+	tB = new HUDElement( fileManager->getSprite("toolbar") );
+
+	hB->setTextureRect(0, 0, 240, 40);
+	hB->setPosition(0, 0);
+
+	mB->setTextureRect(0, 0, 240, 40);
+	mB->setPosition(0, 40);
+
+	tB->setPosition( GridMap::toWindowCoords(GridMap::getSize()).x / 2 - 180, GridMap::toWindowCoords(GridMap::getSize()).y - 90 );
+	
 	hud = new HUD(mB, hB, tB);
 }
 
@@ -76,5 +86,5 @@ void GameManager::setGameState(GameState _gameState) {
 void GameManager::loop(sf::RenderWindow& _window) {
 	map.render(_window);
 	renderPlayer(_window);
-	
+	hud->render(_window);	
 }

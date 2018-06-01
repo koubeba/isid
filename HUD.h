@@ -2,13 +2,13 @@
 #define HUD_H
 
 #include <SFML/Graphics.hpp>
-#include "RenderedObject.h"
+#include "HUDElement.h"
 
 class HUD {
-	RenderedObject *manaBar, *healthBar, *toolBar;
+	HUDElement *manaBar, *healthBar, *toolBar;
 	
 public:
-	HUD(RenderedObject* mB, RenderedObject* hB, RenderedObject* tB);
+	HUD(HUDElement* mB, HUDElement* hB, HUDElement* tB);
 	void render(sf::RenderWindow& window);
 };
 

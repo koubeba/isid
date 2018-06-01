@@ -1,7 +1,7 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
-#include "RenderedObject.h"
+#include "HUDElement.h"
 #include "RenderManager.h"
 #include "FileManager.h"
 #include "HUD.h"

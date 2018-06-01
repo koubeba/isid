@@ -21,8 +21,11 @@ RenderedObject.o: GridMap.h RenderedObject.h RenderedObject.cpp
 FileManager.o: RenderedObject.h FileManager.h FileManager.cpp
 	g++ -c "FileManager.cpp" -o FileManager.o
 
-HUD.o: RenderedObject.h HUD.h HUD.cpp
-	g++ -c "HUD.cpp" -o HUD.o
+HUDElement.o: HUDElement.h HUDElement.cpp
+	g++ -c -g "HUDElement.cpp" -o HUDElement.o
+
+HUD.o: HUDElement.h RenderedObject.h HUD.h HUD.cpp
+	g++ -c -g "HUD.cpp" -o HUD.o
 
 RenderManager.o: RenderedObject.h RenderManager.h RenderManager.cpp
 	g++ -c "RenderManager.cpp" -o RenderManager.o

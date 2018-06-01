@@ -20,6 +20,7 @@ int main() {
 	// construct the gameManager. There will only be this one instance during the execution of this program
 	GameManager gameManager = GameManager(&renderManager, &fileManager);
 	gameManager.initPlayer();
+	gameManager.initHUD();
 	gameManager.loadBiome("grassland.json");
 
 	sf::RenderWindow window(sf::VideoMode(WINDOW_L, WINDOW_H), "GAMEEEE");
