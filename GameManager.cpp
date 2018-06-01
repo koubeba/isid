@@ -68,6 +68,7 @@ void GameManager::receiveUserInput(sf::Event event) {
 		}
 		else if(event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
 		else if(event.key.code == sf::Keyboard::P){ player.drainMana(10); }
+		else if(event.key.code == sf::Keyboard::Escape) { gameState = QUIT; }
 		userInputTime.restart();
 	}
 	

@@ -38,6 +38,11 @@ int main() {
 			gameManager.receiveUserInput(event);
 		}
 		
+		if(gameManager.getGameState() == QUIT){
+			window.close();
+			return 0;
+		}
+
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 		

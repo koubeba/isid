@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-enum GameState{INGAME, PAUSE, MENU};
+enum GameState{INGAME, PAUSE, MENU, QUIT};
 
 class GameManager {
 	
