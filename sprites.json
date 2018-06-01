@@ -1,3 +1,12 @@
 {
-	"player":"sprites/player.png"
+	"player":
+	[
+		{"name":"player", "path":"sprites/player.png"}
+	],
+	"HUD":
+	[
+		{"name":"healthbar", "path":"sprites/HUD/healthbar.png"},
+		{"name":"manabar", "path":"sprites/HUD/manabar.png"},
+		{"name":"toolbar", "path":"sprites/HUD/toolbar.png"}
+	]
 }

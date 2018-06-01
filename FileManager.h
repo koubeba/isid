@@ -21,8 +21,9 @@ class FileManager {
 
 public:
 	FileManager();
-	RenderedObject* readRenderedObject(const char* filename);
-	void loadBiomeSprites(const char* _biome);
+	void init(const char* filename);
+	void loadBiomeSprites(const char* filename);
+	void readSpritesFromJson(Json::Value& object);
 	sf::Sprite* getSprite(std::string name);
 };
 

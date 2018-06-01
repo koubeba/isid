@@ -3,8 +3,7 @@
 FileManager::FileManager() {
 }
 
-RenderedObject* FileManager::readRenderedObject(const char* filename) {
-
+void FileManager::init(const char* filename){
 	std::ifstream ifs(filename);
 		
 	// add file stream exceptions here..
@@ -16,30 +15,38 @@ RenderedObject* FileManager::readRenderedObject(const char* filename) {
 	// add filemanager exceptions ...
 	// check if the object isn't empty, if required members exist etc.
 
-	// read the player sprite:
-	
-	sf::Texture* tex = new sf::Texture();
-	tex->loadFromFile(obj["player"].asString());
+	Json::Value sprites;
 
-	sprites.insert(std::pair<std::string, sf::Texture*>("player", tex));
+	sprites = obj["player"];
+	this->readSpritesFromJson(sprites);
 
+	sprites = obj["HUD"];
+	this->readSpritesFromJson(sprites);
 
-	return NULL;
+	//...
+
 }
 
-void FileManager::loadBiomeSprites(const char* _biome){
-	std::ifstream ifs(_biome);
+void FileManager::loadBiomeSprites(const char* filename){
+	std::ifstream ifs(filename);
 	Json::Reader reader;
 	Json::Value biome;
-	reader.parse(ifs, biome);
-	const Json::Value& new_sprites = biome["sprites"];
 
+	reader.parse(ifs, biome);
+
+	Json::Value new_sprites = biome["sprites"];
+	this->readSpritesFromJson(new_sprites);
+}
+
+void FileManager::readSpritesFromJson(Json::Value& object) {
+
+	// read the sprites:
+	
 	sf::Texture* tex;
-	for (int i=0; i<sprites.size(); i++){
+	for (int i=0; i<object.size(); i++){
 		tex = new sf::Texture();
-		tex->loadFromFile(new_sprites[i]["path"].asString());
-		sprites.erase(new_sprites[i]["name"].asString());
-		sprites.insert(std::pair<std::string, sf::Texture*>(new_sprites[i]["name"].asString(), tex));
+		tex->loadFromFile(object[i]["path"].asString());
+		sprites.insert(std::pair<std::string, sf::Texture*>(object[i]["name"].asString(), tex));
 	}
 }
 

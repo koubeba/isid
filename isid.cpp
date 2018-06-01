@@ -16,7 +16,7 @@ int main() {
 	RenderManager renderManager = RenderManager();
 
 	FileManager fileManager = FileManager();
-	fileManager.readRenderedObject(SPRITES_PATH);
+	fileManager.init(SPRITES_PATH);
 	// construct the gameManager. There will only be this one instance during the execution of this program
 	GameManager gameManager = GameManager(&renderManager, &fileManager);
 	gameManager.initPlayer();
