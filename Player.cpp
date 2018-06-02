@@ -15,5 +15,6 @@ void Player::useManaPotion(){
 }
 
 void Player::update(){
+    Pawn::update();
     if(health <= 0) alive = false;
 }

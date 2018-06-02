@@ -3,7 +3,13 @@
 
 #include "RenderedObject.h"
 
+#include <cmath>
+
 enum Direction{UP, DOWN, LEFT, RIGHT};
+
+const float PAWN_SPEED = .001f;
+
+float distance(const Vec2D& a, const Vec2D& b);
 
 class Pawn : public RenderedObject{
 protected:
@@ -11,6 +17,9 @@ protected:
     Direction direction;
     int health;
     int mana;
+    Vec2D animTarget;
+    bool isMoving;
+
 public:
     Pawn();
     Pawn(sf::Sprite* sprite);
@@ -18,6 +27,7 @@ public:
     void drainMana(int amount);
     int getHealth();
     int getMana();
+    virtual void update();
 
     void move(Direction);
 

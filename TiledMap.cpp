@@ -2,9 +2,9 @@
 
 TiledMap::TiledMap(){
     Vec2D size = GridMap::getSize();
-    tiles = new Tile*[size.x];
+    tiles = new Tile*[int(size.x)];
     for(int i=0; i<size.x; i++){
-        tiles[i] = new Tile[size.y];
+        tiles[i] = new Tile[int(size.y)];
     }
 }
 

@@ -5,7 +5,7 @@ Vec2D::Vec2D() {
 	y = 0;
 }
 
-Vec2D::Vec2D(int _x, int _y) {
+Vec2D::Vec2D(float _x, float _y) {
 	x = _x;
 	y = _y;
 }
@@ -15,7 +15,7 @@ Vec2D Vec2D::operator+(Vec2D other) {
 }
 
 Vec2D Vec2D::operator%(Vec2D other) {
-	return Vec2D(this->x % other.x, this->y % other.y);
+	return Vec2D(int(this->x) % int(other.x), int(this->y) % int(other.y)); // hackssss
 }
 
 Vec2D Vec2D::operator*(Vec2D other) {
