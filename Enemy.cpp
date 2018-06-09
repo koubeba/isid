@@ -7,6 +7,7 @@ Enemy::Enemy(sf::Sprite* _sprite){
 }
 
 void Enemy::update(){
+    Pawn::update();
     if (health <= 0) alive = false;
 
     //... 'ere be dragons
