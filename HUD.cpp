@@ -12,7 +12,7 @@ void HUD::render(sf::RenderWindow& window) {
 	toolBar->render(window);
 }
 
-void HUD::update(Player player){
+void HUD::update(Player &player){
 	int health = player.getHealth();
 	if(health >= 95 ) healthBar->setTextureRect(0, 0, 240, 40);
 	else if(health >= 85) healthBar->setTextureRect(0, 40, 240, 40);

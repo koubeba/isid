@@ -10,7 +10,7 @@ class HUD {
 	
 public:
 	HUD(HUDElement* mB, HUDElement* hB, HUDElement* tB);
-	void update(Player player);
+	void update(Player &player);
 	void render(sf::RenderWindow& window);
 };
 
