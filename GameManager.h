@@ -22,8 +22,8 @@ class GameManager {
 	RenderManager* renderManager;
 	FileManager* fileManager;
 
-	sf::Clock userInputTime;
-	int userInputInterval;
+	//sf::Clock userInputTime;
+	//int userInputInterval;
 
 	TiledMap map;
 	Player player;

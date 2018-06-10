@@ -5,8 +5,8 @@ Pawn::Pawn(){
     alive = true;
     health = 100;
     mana = 100;
-    direction = DOWN; //hehehe he he  he   he
-    isMoving = false;
+    direction = DOWN;
+    moving = false;
 }
 
 Pawn::Pawn(sf::Sprite* _sprite){
@@ -29,6 +29,10 @@ int Pawn::getMana(){
     return mana;
 }
 
+bool Pawn::isMoving(){
+    return moving;
+}
+
 void Pawn::move(Direction dir){
     switch(dir){
         case UP:
@@ -44,20 +48,20 @@ void Pawn::move(Direction dir){
             this->animTarget = Vec2D(this->getPosition() + Vec2D(1, 0));
             break;
     }
-    this->isMoving = true;
+    moving = true;
 }
 
 void Pawn::update() {
-    if (isMoving && distance(this->animTarget, this->getPosition()) > PAWN_SPEED) {
+    if (moving && distance(this->animTarget, this->getPosition()) > PAWN_SPEED) {
         float dx = this->animTarget.x - this->getPosition().x;
         float dy = this->animTarget.y - this->getPosition().y;
         float angle = atan2(dy, dx);
         float xVelocity = PAWN_SPEED * cos(angle);
         float yVelocity = PAWN_SPEED * sin(angle);
         this->setPosition(this->getPosition() + Vec2D(xVelocity, yVelocity));
-    } else if (isMoving) {
+    } else if (moving) {
         // distance < PAWN_SPEED
-        isMoving = false;
+        moving = false;
         this->setPosition(this->animTarget);
     }
 }

@@ -7,7 +7,7 @@
 
 enum Direction{UP, DOWN, LEFT, RIGHT};
 
-const float PAWN_SPEED = .001f;
+const float PAWN_SPEED = .00075f;  // set this to a right value, please
 
 float distance(const Vec2D& a, const Vec2D& b);
 
@@ -18,7 +18,7 @@ protected:
     int health;
     int mana;
     Vec2D animTarget;
-    bool isMoving;
+    bool moving;
 
 public:
     Pawn();
@@ -27,6 +27,7 @@ public:
     void drainMana(int amount);
     int getHealth();
     int getMana();
+    bool isMoving();
     virtual void update();
 
     void move(Direction);

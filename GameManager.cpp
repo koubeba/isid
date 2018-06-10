@@ -8,8 +8,6 @@ GameManager::GameManager(RenderManager* _renderManager, FileManager* _fileManage
 	this->gameState = MENU;
 	renderManager = _renderManager;
 	fileManager = _fileManager;
-
-	userInputInterval = 50;
 }
 
 void GameManager::initPlayer() {
@@ -44,35 +42,9 @@ void GameManager::initHUD() {
 }
 
 void GameManager::receiveUserInput(sf::Event event) {
-	if (userInputTime.getElapsedTime().asMilliseconds() >= userInputInterval) {
-		Vec2D player_position = player.getPosition();
-
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) {
-			player.setDirection(RIGHT);
-			if( player_position.x + 1 < GridMap::getSize().x && map.getTileType(player_position.x + 1, player_position.y) == FLOOR )
-				player.move(RIGHT);
-		}
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left){
-			player.setDirection(LEFT);
-			if( player_position.x > 0 && map.getTileType(player_position.x - 1, player_position.y) == FLOOR )
-				player.move(LEFT);
-		}
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
-			player.setDirection(UP);
-			if( player_position.y > 0 && map.getTileType(player_position.x, player_position.y - 1) == FLOOR )
-				player.move(UP);
-		}
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
-			player.setDirection(DOWN);
-			if(player_position.y + 1 < GridMap::getSize().y && map.getTileType(player_position.x, player_position.y + 1) == FLOOR )
-				player.move(DOWN);
-		}
-		else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
-		else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){ player.drainMana(10); }
-		else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { gameState = QUIT; }
-		userInputTime.restart();
-	}
-	
+	if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
+	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){ player.drainMana(10); }
+	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { gameState = QUIT; }	
 }
 
 sf::Sprite* GameManager::getSprite(std::string name){
