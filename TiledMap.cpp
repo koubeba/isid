@@ -90,6 +90,8 @@ void TiledMap::generate(const char* biome){
     tiles[6][6].setTileType(OBSTACLE);
     tiles[12][3].setTileType(OBSTACLE);
 	tiles[14][12].setTileType(OBSTACLE);
+
+    tiles[8][7].setTileType(CHEST);
     
     items.push_back( new Item(10, 10, HPOTION) );
     items.push_back( new Item(12, 10, MPOTION) );

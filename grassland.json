@@ -6,6 +6,6 @@
         {"name":"floor", "path":"sprites/biomes/grassland/grass.png"},
         {"name":"obstacle", "path":"sprites/biomes/grassland/tree.png"},
         {"name":"liquid", "path":"player.gif"},
-        {"name":"chest", "path":"player.gif"}
+        {"name":"chest", "path":"sprites/biomes/grassland/chest.png"}
     ]
 }
