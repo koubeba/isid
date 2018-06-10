@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include "Vec2D.h"
 #include "FileManager.h"
+#include "Item.h"
 
 #include <jsoncpp/json/json.h>
 #include <fstream>
@@ -11,6 +12,7 @@
 
 class TiledMap {
     Tile** tiles;
+    std::vector<Item*> items;
 public:
     TiledMap();
     TileType getTileType(int x, int y);

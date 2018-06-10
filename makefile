@@ -3,6 +3,9 @@ LIBS=-lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp
 friends: isid
 all: isid
 
+Item.o: RenderedObject.h Item.h Item.cpp
+	g++ -c -g "Item.cpp" -o Item.o
+
 Enemy.o: Pawn.h Enemy.h Enemy.cpp
 	g++ -c -g "Enemy.cpp" -o Enemy.o
 
@@ -45,9 +48,9 @@ GameManager.o: TiledMap.h RenderedObject.h HUD.h RenderManager.h FileManager.h G
 isid.o: GameManager.h isid.cpp
 	g++ -c -g "isid.cpp" -o isid.o
 	
-isid: Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
+isid: Item.o Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
 	@echo "Building the game"
-	g++ -o isid -g Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
+	g++ -o isid -g Item.o Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
 
 clean:
 	@echo "Removing object files and executable"

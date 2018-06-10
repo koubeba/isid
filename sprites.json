@@ -8,5 +8,12 @@
 		{"name":"healthbar", "path":"sprites/HUD/healthbar.png"},
 		{"name":"manabar", "path":"sprites/HUD/manabar.png"},
 		{"name":"toolbar", "path":"sprites/HUD/toolbar.png"}
+	],
+	"items":
+	[
+		{"name":"hpotion", "path":"sprites/items/health_pot.png"},
+		{"name":"mpotion", "path":"sprites/items/mana_pot.png"},
+		{"name":"sword_tile", "path":"sprites/items/sword_tile.png"},
+		{"name":"sword", "path":"sprites/items/sword.png"}
 	]
 }

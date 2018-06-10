@@ -36,6 +36,20 @@ void TiledMap::load(FileManager& fileManager){
             tiles[i][j].loadSprite(fileManager.getSprite( type_name ));
         }
     }
+    for(int i=0; i<items.size(); i++){
+        switch(items[i]->getType()){
+            case HPOTION:
+                type_name = "hpotion";
+                break;
+            case MPOTION:
+                type_name = "mpotion";
+                break;
+            case WEAPON:
+                type_name = "sword_tile";
+                break;
+        }
+        items[i]->setSprite( fileManager.getSprite( type_name ));
+    }
 }
 
 void TiledMap::render(sf::RenderWindow& _window){
@@ -44,6 +58,9 @@ void TiledMap::render(sf::RenderWindow& _window){
         for(int j=0; j<size.y; j++){
             tiles[i][j].render(_window);
         }
+    }
+    for(int i=0; i<items.size(); i++){
+        items[i]->render(_window);
     }
 }
 
@@ -57,6 +74,11 @@ void TiledMap::generate(const char* biome){
     tiles[6][6].setTileType(OBSTACLE);
     tiles[12][3].setTileType(OBSTACLE);
 	tiles[14][12].setTileType(OBSTACLE);
+    
+    items.push_back( new Item(10, 10, HPOTION) );
+    items.push_back( new Item(12, 10, MPOTION) );
+    items.push_back( new Item(13, 9, WEAPON) );
+    
 
     int density, groupity;
     density = values["density"].asInt();

@@ -23,6 +23,9 @@ void FileManager::init(const char* filename){
 	sprites = obj["HUD"];
 	this->readSpritesFromJson(sprites);
 
+	sprites = obj["items"];
+	this->readSpritesFromJson(sprites);
+
 	//...
 
 }
