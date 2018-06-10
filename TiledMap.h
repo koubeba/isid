@@ -16,6 +16,9 @@ class TiledMap {
 public:
     TiledMap();
     TileType getTileType(int x, int y);
+    Item* getItem(Vec2D position);
+    void removeItem(Vec2D position);
+
     void generate(const char* biome);
     void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);

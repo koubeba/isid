@@ -12,6 +12,22 @@ TileType TiledMap::getTileType(int x, int y){
     return tiles[x][y].getTileType();
 }
 
+Item* TiledMap::getItem(Vec2D position){
+    for(std::vector<Item*>::iterator i=items.begin(); i != items.end(); i++){
+        if( (*i)->getPosition().x == position.x && (*i)->getPosition().y == position.y) return *i;
+    }
+    return NULL;
+}
+
+void TiledMap::removeItem(Vec2D position){
+    for(std::vector<Item*>::iterator i=items.begin(); i != items.end(); i++){
+        if( (*i)->getPosition().x == position.x && (*i)->getPosition().y == position.y){
+            items.erase(i);
+            break;
+        }
+    }
+}
+
 void TiledMap::load(FileManager& fileManager){
     Vec2D size = GridMap::getSize();
     std::string type_name;
@@ -77,7 +93,9 @@ void TiledMap::generate(const char* biome){
     
     items.push_back( new Item(10, 10, HPOTION) );
     items.push_back( new Item(12, 10, MPOTION) );
+    items.push_back( new Item(13, 9, HPOTION) );
     items.push_back( new Item(13, 9, WEAPON) );
+    
     
 
     int density, groupity;

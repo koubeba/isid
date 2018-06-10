@@ -2,8 +2,11 @@
 #define __PLAYER_H__
 
 #include "Pawn.h"
+#include "Item.h"
+#include "TiledMap.h"
 
 class Player : public Pawn {
+    std::vector<Item*> equipment;
     //slots, pots, and so on
 public:
     Player();
@@ -13,7 +16,7 @@ public:
     void useManaPotion();
     //void useSkill(?);
 
-    void update();
+    void update(TiledMap &map);
 };
 
 #endif

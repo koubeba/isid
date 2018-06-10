@@ -89,7 +89,7 @@ void GameManager::setGameState(GameState _gameState) {
 }
 
 void GameManager::loop(sf::RenderWindow& _window) {
-	player.update();
+	player.update(map);
 	hud->update(player);
 
 	map.render(_window);
