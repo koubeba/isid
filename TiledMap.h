@@ -10,6 +10,10 @@
 #include <fstream>
 #include <iostream>
 
+class Player;
+
+int random(int min, int max);
+
 class TiledMap {
     Tile** tiles;
     std::vector<Item*> items;
@@ -19,7 +23,7 @@ public:
     Item* getItem(Vec2D position);
     void removeItem(Vec2D position);
 
-    void generate(const char* biome);
+    void generate(const char* biome, Player* player);
     void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);
 };

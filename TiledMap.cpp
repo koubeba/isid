@@ -1,4 +1,5 @@
 #include "TiledMap.h"
+#include "Player.h"
 
 TiledMap::TiledMap(){
     Vec2D size = GridMap::getSize();
@@ -33,8 +34,6 @@ void TiledMap::load(FileManager& fileManager){
     std::string type_name;
     for(int i=0; i<size.x; i++){
         for(int j=0; j<size.y; j++){
-            tiles[i][j].setPosition( Vec2D(i, j) );
-
             switch(tiles[i][j].getTileType()){
                 case FLOOR:
                     type_name = "floor";
@@ -80,12 +79,27 @@ void TiledMap::render(sf::RenderWindow& _window){
     }
 }
 
-void TiledMap::generate(const char* biome){
+int random(int min, int max){
+    if (max<min){
+        int temp = max;
+        max = min;
+        min = temp;
+    }
+    return ( rand()/(RAND_MAX+1.0) )*(max-min) + min;
+}
+
+
+void TiledMap::generate(const char* biome, Player* player){
     std::ifstream ifs(biome);
 	Json::Reader reader;
 	Json::Value values;
 	reader.parse(ifs, values);
 
+    int density, groupity;
+    density = values["density"].asInt();
+    groupity = values["groupity"].asInt();
+
+    /*
     tiles[4][2].setTileType(OBSTACLE);
     tiles[6][6].setTileType(OBSTACLE);
     tiles[12][3].setTileType(OBSTACLE);
@@ -97,11 +111,36 @@ void TiledMap::generate(const char* biome){
     items.push_back( new Item(12, 10, MPOTION) );
     items.push_back( new Item(13, 9, HPOTION) );
     items.push_back( new Item(13, 9, WEAPON) );
-    
-    
+    */
 
-    int density, groupity;
-    density = values["density"].asInt();
-    groupity = values["groupity"].asInt();
-    //... 'ere be magic
+    time_t tt;
+    srand( time(&tt) );
+
+    std::vector<Tile*> free_tiles;
+
+    Vec2D size = GridMap::getSize();
+    for(int i=0; i<size.x; i++){
+        for(int j=0; j<size.y; j++){
+            tiles[i][j].setPosition( Vec2D(i, j) );
+            if(tiles[i][j].getTileType() == FLOOR) free_tiles.push_back(&tiles[i][j]);
+        }
+    }
+
+    std::vector<Tile*>::iterator it;
+
+    int obstacle_num = random( 13, 15 );
+
+    for(int i=0; i<obstacle_num; i++){
+        it = free_tiles.begin();
+        int temp = random( 0, free_tiles.size() );
+        for(int j=0; j<temp; j++) it++;
+        (*it)->setTileType(OBSTACLE);
+        free_tiles.erase(it);
+    }
+
+    int player_pos = random(0, free_tiles.size());
+    it = free_tiles.begin();
+    for ( int i=0; i<player_pos; i++) it++;
+    player->setPosition( (*it)->getPosition() );
+    
 }

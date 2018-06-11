@@ -17,7 +17,7 @@ void GameManager::initPlayer() {
 
 void GameManager::loadBiome(const char* biome){
 	fileManager->loadBiomeSprites(biome);
-	map.generate(biome);
+	map.generate(biome, &player);
 	map.load(*fileManager);
 }
 
