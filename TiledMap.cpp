@@ -13,6 +13,10 @@ TileType TiledMap::getTileType(int x, int y){
     return tiles[x][y].getTileType();
 }
 
+TileType TiledMap::getTileType(Vec2D position){
+    return getTileType(position.x, position.y);
+}
+
 Item* TiledMap::getItem(Vec2D position){
     for(std::vector<Item*>::iterator i=items.begin(); i != items.end(); i++){
         if( (*i)->getPosition().x == position.x && (*i)->getPosition().y == position.y) return *i;
@@ -89,6 +93,67 @@ int random(int min, int max){
 }
 
 
+
+int TiledMap::countAliveNeighbours(int x, int y){
+    int count = 0;
+    int neighbour_x, neighbour_y;
+    for(int i=-1; i<=1; i++){
+        for(int j=-1; j<=1; j++){
+            neighbour_x = x+i;
+            neighbour_y = y+j;
+            
+            if(i == 0 && j == 0) continue;
+            else if(neighbour_x < 0 || neighbour_y < 0 || neighbour_x >= GridMap::getSize().x || neighbour_y >= GridMap::getSize().y){
+                count++;
+            }
+            else if(tiles[neighbour_x][neighbour_y].getTileType() == OBSTACLE){
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+void TiledMap::doSimulationStep(int starvationLimit, int overpopulationLimit, int birthThreshold){
+    Vec2D mapsize = GridMap::getSize();
+    bool** newMap = new bool*[(int)mapsize.x];
+    for(int i=0; i<mapsize.x; i++){
+        newMap[i] = new bool[(int)mapsize.y];
+    }
+    
+    for(int i=0; i<mapsize.x; i++){
+        for(int j=0; j<mapsize.y; j++){
+            int nbs = countAliveNeighbours(i, j);
+            
+            if(tiles[i][j].getTileType() == OBSTACLE){
+                if(nbs < starvationLimit || nbs > overpopulationLimit){
+                    newMap[i][j] = false;
+                }
+                else{
+                    newMap[i][j] = true;
+                }
+            }
+            else{
+                if(nbs > birthThreshold){
+                    newMap[i][j] = true;
+                }
+                else{
+                    newMap[i][j] = false;
+                }
+            }
+        }
+    }
+
+    for(int i=0; i<mapsize.x; i++){
+        for(int j=0; j<mapsize.y; j++){
+            if(newMap[i][j]) tiles[i][j].setTileType(OBSTACLE);
+            else tiles[i][j].setTileType(FLOOR);
+        }
+        delete newMap[i];
+    }
+
+}
+
 void TiledMap::generate(const char* biome, Player* player){
     std::ifstream ifs(biome);
 	Json::Reader reader;
@@ -98,6 +163,9 @@ void TiledMap::generate(const char* biome, Player* player){
     int density, groupity;
     density = values["density"].asInt();
     groupity = values["groupity"].asInt();
+
+    Vec2D mapsize = GridMap::getSize();
+    float chanceToStartAlive = 0.45f;
 
     /*
     tiles[4][2].setTileType(OBSTACLE);
@@ -116,6 +184,24 @@ void TiledMap::generate(const char* biome, Player* player){
     time_t tt;
     srand( time(&tt) );
 
+    for(int i=0; i<mapsize.x; i++){
+        for (int j=0; j<mapsize.y; j++){
+            if(rand()/(RAND_MAX+1.0) < chanceToStartAlive) tiles[i][j].setTileType(OBSTACLE);
+        } 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     std::vector<Tile*> free_tiles;
 
     Vec2D size = GridMap::getSize();
@@ -127,7 +213,7 @@ void TiledMap::generate(const char* biome, Player* player){
     }
 
     std::vector<Tile*>::iterator it;
-
+/*
     int obstacle_num = random( 13, 15 );
 
     for(int i=0; i<obstacle_num; i++){
@@ -137,7 +223,7 @@ void TiledMap::generate(const char* biome, Player* player){
         (*it)->setTileType(OBSTACLE);
         free_tiles.erase(it);
     }
-
+*/
     int player_pos = random(0, free_tiles.size());
     it = free_tiles.begin();
     for ( int i=0; i<player_pos; i++) it++;

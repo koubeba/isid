@@ -44,6 +44,7 @@ void GameManager::initHUD() {
 void GameManager::receiveUserInput(sf::Event event) {
 	if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
 	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){ player.drainMana(10); }
+	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::K){ map.doSimulationStep(3, 10, 4); map.load(*fileManager);}
 	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { gameState = QUIT; }	
 }
 
