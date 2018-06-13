@@ -3,6 +3,12 @@ LIBS=-lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp
 friends: isid
 all: isid
 
+BehavioralNode.o: BehavioralNode.h BehavioralNode.cpp
+	g++ -c -g "BehavioralNode.cpp" -o BehavioralNode.o
+
+CompositeNode.o: BehavioralNode.h CompositeNode.h CompositeNode.cpp
+	g++ -c -g "CompositeNode.cpp" -o CompositeNode.o
+	
 Item.o: RenderedObject.h Item.h Item.cpp
 	g++ -c -g "Item.cpp" -o Item.o
 
@@ -47,8 +53,8 @@ GameManager.o: TiledMap.h RenderedObject.h HUD.h RenderManager.h FileManager.h G
 
 isid.o: GameManager.h isid.cpp
 	g++ -c -g "isid.cpp" -o isid.o
-	
-isid: Item.o Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
+
+isid: BehavioralNode.o Item.o Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o
 	@echo "Building the game"
 	g++ -o isid -g Item.o Enemy.o Player.o Pawn.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o GameManager.o isid.o $(LIBS)
 
