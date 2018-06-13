@@ -15,9 +15,16 @@ void GameManager::initPlayer() {
 	player.setPosition( Vec2D(0, 3) );
 }
 
+void GameManager::initEnemies() {
+	enemies = std::vector<Enemy*>();
+	Enemy* enemy = new Enemy(fileManager->getSprite("tubaman"));
+	enemy->setPosition(Vec2D(0, 5));
+	enemies.push_back(enemy);
+}
+
 void GameManager::loadBiome(const char* biome){
 	fileManager->loadBiomeSprites(biome);
-	map.generate(biome, &player);
+	map.generate(biome, &player, enemies);
 	map.load(*fileManager);
 }
 
@@ -37,7 +44,7 @@ void GameManager::initHUD() {
 	mB->setPosition(0, 40);
 
 	tB->setPosition( GridMap::toWindowCoords(GridMap::getSize()).x / 2 - 180, GridMap::toWindowCoords(GridMap::getSize()).y - 90 );
-	
+
 	hud = new HUD(mB, hB, tB);
 }
 
@@ -45,7 +52,7 @@ void GameManager::receiveUserInput(sf::Event event) {
 	if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
 	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){ player.drainMana(10); }
 	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::K){ map.doSimulationStep(3, 10, 4); map.load(*fileManager);}
-	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { gameState = QUIT; }	
+	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) { gameState = QUIT; }
 }
 
 sf::Sprite* GameManager::getSprite(std::string name){
@@ -54,7 +61,6 @@ sf::Sprite* GameManager::getSprite(std::string name){
 
 GameState GameManager::getGameState() {
 	return this->gameState;
-
 }
 
 void GameManager::setGameState(GameState _gameState) {
@@ -67,5 +73,9 @@ void GameManager::loop(sf::RenderWindow& _window) {
 
 	map.render(_window);
 	player.render(_window);
+	for (std::vector<Enemy*>::iterator itr = enemies.begin(); itr != enemies.end(); ++itr) {
+		(*itr)->render(_window);
+	}
 	hud->render(_window);
+
 }

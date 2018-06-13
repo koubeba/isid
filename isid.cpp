@@ -20,6 +20,7 @@ int main() {
 	// construct the gameManager. There will only be this one instance during the execution of this program
 	GameManager gameManager = GameManager(&renderManager, &fileManager);
 	gameManager.initPlayer();
+	gameManager.initEnemies();
 	gameManager.initHUD();
 	gameManager.loadBiome("grassland.json");
 
@@ -37,7 +38,7 @@ int main() {
 			// receive user input
 			gameManager.receiveUserInput(event);
 		}
-		
+
 		if(gameManager.getGameState() == QUIT){
 			window.close();
 			return 0;
@@ -45,9 +46,9 @@ int main() {
 
 		// clear the window with black color
 		window.clear(sf::Color::Black);
-		
+
 		// here we will draw everything
-		gameManager.loop(window);		
+		gameManager.loop(window);
 		window.display();
 
 	}

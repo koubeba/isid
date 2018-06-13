@@ -6,6 +6,7 @@
 #include "FileManager.h"
 #include "HUD.h"
 #include "TiledMap.h"
+#include "Enemy.h"
 #include "Player.h"
 
 #include <SFML/Graphics.hpp>
@@ -17,8 +18,8 @@
 enum GameState{INGAME, PAUSE, MENU, QUIT};
 
 class GameManager {
-	
-	GameState gameState;	
+
+	GameState gameState;
 	RenderManager* renderManager;
 	FileManager* fileManager;
 
@@ -28,14 +29,17 @@ class GameManager {
 	TiledMap map;
 	Player player;
 	HUD* hud;
+	std::vector<Enemy*> enemies;
+
 
 	public:
 	GameManager(RenderManager* _renderManager, FileManager* _fileManager); //POMYSLEC: Czy gameManager ma byc singletonem albo klasa statyczna?
-	
-	// funkcje inicjalizujace 
+
+	// funkcje inicjalizujace
 	void initPlayer();
+	void initEnemies();
 	void initHUD();
-	void loadBiome(const char* biome);	
+	void loadBiome(const char* biome);
 
 	void receiveUserInput(sf::Event event);
 
