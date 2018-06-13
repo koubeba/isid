@@ -4,7 +4,7 @@
 #include "Pawn.h"
 #include <SFML/Graphics.hpp>
 
-class Enemy : public Pawn{
+class Enemy : public Pawn {
 public:
     Enemy();
     Enemy(sf::Sprite* sprite);
