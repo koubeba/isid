@@ -218,4 +218,11 @@ void TiledMap::generate(const char* biome, Player* player,std::vector<Enemy*>& e
     for ( int i=0; i<player_pos; i++) it++;
     player->setPosition( (*it)->getPosition() );
 
+    for (std::vector<Enemy*>::iterator itr = enemies.begin(); itr != enemies.end(); ++itr) {
+      int enemy_pos = random(0, free_tiles.size());
+      it = free_tiles.begin();
+      for ( int i=0; i<enemy_pos; i++) it++;
+      (*itr)->setPosition( (*it)->getPosition() );
+    }
+
 }
