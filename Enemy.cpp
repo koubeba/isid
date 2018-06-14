@@ -28,8 +28,7 @@ void Enemy::findDir(Pawn& player, GraphMap& gmap, TiledMap& map){
     Node enemyNode = gmap.findNode(this->getPosition().x, this->getPosition().y);
     Direction dire;
     if(!moving){
-        int dir = gmap.aStar(&map, &enemyNode, &playerNode);
-        //Direction dire = RIGHT;
+        int dir = gmap.aStar(&map, &playerNode, &enemyNode);
         Vec2D pos = this->getPosition();
         std::cout << dir << "\n";
         dire = static_cast<Direction>(dir);
@@ -42,23 +41,4 @@ void Enemy::findDir(Pawn& player, GraphMap& gmap, TiledMap& map){
             if (map.getTileType(pos) == FLOOR) this->move(dire);
         }
     }
-    /*std::map<Node*, Node*>::iterator nextNode = nodeMap.begin();
-    Node* node = nextNode->second;
-    Vec2D dist = this->getPosition() - node->position;
-    if(dist.x > 0){
-        move(RIGHT);
-        return RIGHT;
-    }
-    else{
-        move(LEFT);
-        return LEFT;
-    }
-    if(dist.y > 0){
-        move(UP);
-        return UP;
-    }
-    else{
-        move(DOWN);
-        return DOWN;
-    }*/
 }
