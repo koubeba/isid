@@ -1,6 +1,8 @@
 #ifndef COMPOSITE_NODE_H
 #define COMPOSITE_NODE_H
 
+// A composite node is a node that processes its child nodes
+
 #include "BehavioralNode.h"
 #include <vector>
 

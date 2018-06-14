@@ -9,17 +9,30 @@
 #include <jsoncpp/json/json.h>
 #include <fstream>
 #include <iostream>
+#include <vector>
+
+class Player;
+class Enemy;
+
+int random(int min, int max);
 
 class TiledMap {
     Tile** tiles;
     std::vector<Item*> items;
+
+    //cellular automaton functions
+    int countAliveNeighbours(int x, int y);
+
+
 public:
+    void doSimulationStep(int starvationLimit, int overpopulationLimit, int birthThreshold);
     TiledMap();
     TileType getTileType(int x, int y);
+    TileType getTileType( Vec2D position);
     Item* getItem(Vec2D position);
     void removeItem(Vec2D position);
 
-    void generate(const char* biome);
+    void generate(const char* biome, Player* player, std::vector<Enemy*>& enemies);
     void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);
 };
