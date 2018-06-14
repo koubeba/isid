@@ -1,7 +1,7 @@
 #ifndef __TILE_H__
 #define __TILE_H__
 
-#include "RenderedObject.h"
+#include "RenderedObject.h" 
 
 enum TileType{FLOOR, OBSTACLE, LIQUID, CHEST};
 

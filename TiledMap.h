@@ -32,6 +32,7 @@ public:
     Item* getItem(Vec2D position);
     void removeItem(Vec2D position);
 
+    Tile* getTile(int x, int y){ return &tiles[x][y]; }
     void generate(const char* biome, Player* player, std::vector<Enemy*>& enemies);
     void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);

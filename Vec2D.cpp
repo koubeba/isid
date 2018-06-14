@@ -14,6 +14,10 @@ Vec2D Vec2D::operator+(Vec2D other) {
 	return Vec2D(this->x + other.x, this->y + other.y);
 }
 
+Vec2D Vec2D::operator-(Vec2D other) {
+	return Vec2D(this->x - other.x, this->y - other.y);
+}
+
 Vec2D Vec2D::operator%(Vec2D other) {
 	return Vec2D(int(this->x) % int(other.x), int(this->y) % int(other.y)); // hackssss
 }

@@ -7,7 +7,7 @@
 
 enum Direction{UP, DOWN, LEFT, RIGHT};
 
-const float PAWN_SPEED = .015f;  // set this to a right value, please
+const float PAWN_SPEED = .001f;  // set this to a right value, please
                                   // ok
 
 float distance(const Vec2D& a, const Vec2D& b);

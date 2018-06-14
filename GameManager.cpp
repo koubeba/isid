@@ -48,6 +48,10 @@ void GameManager::initHUD() {
 	hud = new HUD(mB, hB, tB);
 }
 
+void GameManager::initGraphMap(){
+	gmap.restructureGraph(&map);
+}
+
 void GameManager::receiveUserInput(sf::Event event) {
 	if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::O){ player.takeDamage(10); }
 	else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P){ player.drainMana(10); }
@@ -69,6 +73,7 @@ void GameManager::setGameState(GameState _gameState) {
 
 void GameManager::loop(sf::RenderWindow& _window) {
 	player.update(map);
+	enemies[0]->findDir(player, gmap, map);
 	hud->update(player);
 
 	map.render(_window);

@@ -22,6 +22,7 @@ int main() {
 	gameManager.initPlayer();
 	gameManager.initEnemies();
 	gameManager.initHUD();
+	gameManager.initGraphMap();
 	gameManager.loadBiome("grassland.json");
 
 	sf::RenderWindow window(sf::VideoMode(WINDOW_L, WINDOW_H), "GAMEEEE");
@@ -52,5 +53,6 @@ int main() {
 		window.display();
 
 	}
+	
 	return 0;
 }

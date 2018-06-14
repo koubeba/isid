@@ -8,6 +8,7 @@
 #include "TiledMap.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "GraphMap.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -28,6 +29,7 @@ class GameManager {
 
 	TiledMap map;
 	Player player;
+	GraphMap gmap;
 	HUD* hud;
 	std::vector<Enemy*> enemies;
 
@@ -39,6 +41,7 @@ class GameManager {
 	void initPlayer();
 	void initEnemies();
 	void initHUD();
+	void initGraphMap();
 	void loadBiome(const char* biome);
 
 	void receiveUserInput(sf::Event event);
