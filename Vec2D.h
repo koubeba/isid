@@ -9,6 +9,7 @@ public:
 	Vec2D(float x, float y);
 	
 	Vec2D operator+(Vec2D other);
+	Vec2D operator-(Vec2D other);
 	Vec2D operator%(Vec2D other);
 	Vec2D operator*(Vec2D other);
 	Vec2D operator/(Vec2D other);

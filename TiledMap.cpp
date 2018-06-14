@@ -1,5 +1,6 @@
 #include "TiledMap.h"
 #include "Player.h"
+#include "Enemy.h"
 
 TiledMap::TiledMap(){
     Vec2D size = GridMap::getSize();
@@ -101,7 +102,7 @@ int TiledMap::countAliveNeighbours(int x, int y){
         for(int j=-1; j<=1; j++){
             neighbour_x = x+i;
             neighbour_y = y+j;
-            
+
             if(i == 0 && j == 0) continue;
             else if(neighbour_x < 0 || neighbour_y < 0 || neighbour_x >= GridMap::getSize().x || neighbour_y >= GridMap::getSize().y){
                 count++;
@@ -120,11 +121,11 @@ void TiledMap::doSimulationStep(int starvationLimit, int overpopulationLimit, in
     for(int i=0; i<mapsize.x; i++){
         newMap[i] = new bool[(int)mapsize.y];
     }
-    
+
     for(int i=0; i<mapsize.x; i++){
         for(int j=0; j<mapsize.y; j++){
             int nbs = countAliveNeighbours(i, j);
-            
+
             if(tiles[i][j].getTileType() == OBSTACLE){
                 if(nbs < starvationLimit || nbs > overpopulationLimit){
                     newMap[i][j] = false;
@@ -154,7 +155,7 @@ void TiledMap::doSimulationStep(int starvationLimit, int overpopulationLimit, in
 
 }
 
-void TiledMap::generate(const char* biome, Player* player){
+void TiledMap::generate(const char* biome, Player* player,std::vector<Enemy*>& enemies){
     std::ifstream ifs(biome);
 	Json::Reader reader;
 	Json::Value values;
@@ -165,21 +166,21 @@ void TiledMap::generate(const char* biome, Player* player){
     groupity = values["groupity"].asInt();
 
     Vec2D mapsize = GridMap::getSize();
-    float chanceToStartAlive = 0.45f;
+    float chanceToStartAlive = 0.15f;
 
-    /*
-    tiles[4][2].setTileType(OBSTACLE);
+    
+    /*tiles[4][2].setTileType(OBSTACLE);
     tiles[6][6].setTileType(OBSTACLE);
     tiles[12][3].setTileType(OBSTACLE);
 	tiles[14][12].setTileType(OBSTACLE);
+	
+    //tiles[8][7].setTileType(CHEST);
 
-    tiles[8][7].setTileType(CHEST);
-    
     items.push_back( new Item(10, 10, HPOTION) );
     items.push_back( new Item(12, 10, MPOTION) );
     items.push_back( new Item(13, 9, HPOTION) );
-    items.push_back( new Item(13, 9, WEAPON) );
-    */
+    items.push_back( new Item(13, 9, WEAPON) );*/
+    
 
     time_t tt;
     srand( time(&tt) );
@@ -187,20 +188,8 @@ void TiledMap::generate(const char* biome, Player* player){
     for(int i=0; i<mapsize.x; i++){
         for (int j=0; j<mapsize.y; j++){
             if(rand()/(RAND_MAX+1.0) < chanceToStartAlive) tiles[i][j].setTileType(OBSTACLE);
-        } 
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     std::vector<Tile*> free_tiles;
 
@@ -213,7 +202,7 @@ void TiledMap::generate(const char* biome, Player* player){
     }
 
     std::vector<Tile*>::iterator it;
-/*
+
     int obstacle_num = random( 13, 15 );
 
     for(int i=0; i<obstacle_num; i++){
@@ -223,10 +212,19 @@ void TiledMap::generate(const char* biome, Player* player){
         (*it)->setTileType(OBSTACLE);
         free_tiles.erase(it);
     }
-*/
+
     int player_pos = random(0, free_tiles.size());
     it = free_tiles.begin();
     for ( int i=0; i<player_pos; i++) it++;
+	Vec2D pPos(4,3);
     player->setPosition( (*it)->getPosition() );
-    
+
+    for (std::vector<Enemy*>::iterator itr = enemies.begin(); itr != enemies.end(); ++itr) {
+      int enemy_pos = random(0, free_tiles.size());
+      it = free_tiles.begin();
+      for ( int i=0; i<enemy_pos; i++) it++;
+	//Vec2D ePos(13,2);      
+    (*itr)->setPosition( (*it)->getPosition() );
+    }
+
 }

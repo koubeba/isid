@@ -5,7 +5,7 @@ FileManager::FileManager() {
 
 void FileManager::init(const char* filename){
 	std::ifstream ifs(filename);
-		
+
 	// add file stream exceptions here..
 	Json::Reader reader;
 	Json::Value obj;
@@ -26,6 +26,9 @@ void FileManager::init(const char* filename){
 	sprites = obj["items"];
 	this->readSpritesFromJson(sprites);
 
+	sprites = obj["enemies"];
+	this->readSpritesFromJson(sprites);
+
 	//...
 
 }
@@ -44,7 +47,7 @@ void FileManager::loadBiomeSprites(const char* filename){
 void FileManager::readSpritesFromJson(Json::Value& object) {
 
 	// read the sprites:
-	
+
 	sf::Texture* tex;
 	for (int i=0; i<object.size(); i++){
 		tex = new sf::Texture();

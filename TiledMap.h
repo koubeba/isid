@@ -9,8 +9,10 @@
 #include <jsoncpp/json/json.h>
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 class Player;
+class Enemy;
 
 int random(int min, int max);
 
@@ -20,7 +22,7 @@ class TiledMap {
 
     //cellular automaton functions
     int countAliveNeighbours(int x, int y);
-    
+
 
 public:
     void doSimulationStep(int starvationLimit, int overpopulationLimit, int birthThreshold);
@@ -30,7 +32,9 @@ public:
     Item* getItem(Vec2D position);
     void removeItem(Vec2D position);
 
-    void generate(const char* biome, Player* player);
+    Tile* getTile(int x, int y){ return &tiles[x][y]; }
+
+    void generate(const char* biome, Player* player, std::vector<Enemy*>& enemies);
     void load(FileManager& fileManager);
     void render(sf::RenderWindow& _window);
 };
