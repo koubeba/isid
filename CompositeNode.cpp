@@ -8,6 +8,12 @@ void CompositeNode::addChild(BehavioralNode* node) {
   children.push_back(node);
 }
 
-void CompositeNode::processChildren() {
-  // ...
+Status CompositeNode::processChildren() {
+  // nothing
+}
+
+void CompositeNode::setAllChildrenToUnvisited() {
+  for (std::vector<BehavioralNode*>::iterator child = children.begin(); child != children.end(); ++child) {
+    (*child)->setVisited(false);
+  }
 }

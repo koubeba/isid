@@ -7,11 +7,14 @@
 #include <vector>
 
 class CompositeNode: public BehavioralNode {
+protected:
   std::vector<BehavioralNode*> children;
 public:
   CompositeNode();
   void addChild(BehavioralNode* node);
-  virtual void processChildren();
+  virtual Status processChildren();
+protected:
+  void setAllChildrenToUnvisited();
 };
 
 #endif
