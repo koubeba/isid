@@ -14,7 +14,7 @@ Status WalkNode::processInit() {
   // Look if the player isn't too far away
   Node playerNode = gmap->findNode(player->getPosition().x, player->getPosition().y);
   Node enemyNode = gmap->findNode(enemy->getPosition().x, enemy->getPosition().y);
-  if (manhattanDist(playerNode, enemyNode)> 20) {
+  if (manhattanDist(playerNode, enemyNode)> 10) {
     status = FAILURE;
     return status;
   } else {
@@ -24,10 +24,14 @@ Status WalkNode::processInit() {
 }
 
 Status WalkNode::processContinue() {
+
   Node playerNode = gmap->findNode(player->getPosition().x, player->getPosition().y);
   Node enemyNode = gmap->findNode(enemy->getPosition().x, enemy->getPosition().y);
   if (manhattanDist(playerNode, enemyNode) < 1) {
     status = SUCCESS;
+    return status;
+  } else if (manhattanDist(playerNode, enemyNode) > 10){
+    status = FAILURE;
     return status;
   } else {
     enemy->findDir(*player, *gmap, *map);
