@@ -7,6 +7,7 @@
 #include "BehavioralTree.h"
 
 class Enemy : public Pawn {
+protected:
     int damage;
     BehavioralTree* behavioralTree;
 public:
@@ -16,7 +17,7 @@ public:
     void Damage(Pawn& pawn);
 
     // setters
-    void initializeBehaviorTree(Player* player, GraphMap* gmap, TiledMap* map);
+    virtual void initializeBehaviorTree(Player* player, GraphMap* gmap, TiledMap* map);
 
     // Here we will execute the behaviour tree decision
     void update(Pawn& player);

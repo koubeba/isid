@@ -5,7 +5,8 @@
 	],
 	"enemies":
 	[
-		{"name":"tubaman", "path":"sprites/enemies/tubaman.png"}
+		{"name":"tubaman", "path":"sprites/enemies/tubaman.png"},
+		{"name":"cymbalman", "path":"sprites/enemies/cymbalman.png"}
 	],
 	"HUD":
 	[

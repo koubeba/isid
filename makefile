@@ -61,6 +61,12 @@ GraphMap.o: TiledMap.h Tile.h Pawn.h GraphMap.h GraphMap.cpp
 Enemy.o: BehavioralTree.h GraphMap.h Pawn.h Enemy.h Enemy.cpp
 	g++ $(CFLAGS) -c -g "Enemy.cpp" -o Enemy.o
 
+Tubaman.o: Enemy.h Tubaman.h Tubaman.cpp
+	g++ $(CFLAGS) -c -g "Tubaman.cpp" -o Tubaman.o
+
+Cymbalman.o: Enemy.h Cymbalman.h Cymbalman.cpp
+	g++ $(CFLAGS) -c -g "Cymbalman.cpp" -o Cymbalman.o
+
 Tile.o: Tile.h Tile.cpp
 	g++ $(CFLAGS) -c -g "Tile.cpp" -o Tile.o
 
@@ -100,9 +106,9 @@ RunAwayNode.o: GraphMap.h RunAwayNode.h RunAwayNode.cpp
 isid.o: GameManager.h isid.cpp
 	g++ $(CFLAGS) -c -g "isid.cpp" -o isid.o
 
-isid: BehavioralNode.o DecoratorNode.o Inverter.o Repeater.o RepeatUntilFail.o LeafNode.o WaitNode.o CompositeNode.o MasterNode.o SelectorNode.o SequenceNode.o RandomSelectorNode.o TestLeaf.o BehavioralTree.o Item.o Enemy.o Player.o Pawn.o GraphMap.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o WalkNode.o RunAwayNode.o GameManager.o isid.o
+isid: BehavioralNode.o DecoratorNode.o Inverter.o Repeater.o RepeatUntilFail.o LeafNode.o WaitNode.o CompositeNode.o MasterNode.o SelectorNode.o SequenceNode.o RandomSelectorNode.o TestLeaf.o BehavioralTree.o Item.o Enemy.o Tubaman.o Cymbalman.o Player.o Pawn.o GraphMap.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o WalkNode.o RunAwayNode.o GameManager.o isid.o
 	@echo "Building the game"
-	g++ $(CFLAGS) -o isid -g BehavioralNode.o DecoratorNode.o Inverter.o Repeater.o RepeatUntilFail.o LeafNode.o WaitNode.o CompositeNode.o MasterNode.o SelectorNode.o SequenceNode.o RandomSelectorNode.o TestLeaf.o BehavioralTree.o Item.o Enemy.o Player.o Pawn.o GraphMap.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o WalkNode.o RunAwayNode.o GameManager.o isid.o $(LIBS)
+	g++ $(CFLAGS) -o isid -g BehavioralNode.o DecoratorNode.o Inverter.o Repeater.o RepeatUntilFail.o LeafNode.o WaitNode.o CompositeNode.o MasterNode.o SelectorNode.o SequenceNode.o RandomSelectorNode.o TestLeaf.o BehavioralTree.o Item.o Enemy.o Tubaman.o Cymbalman.o Player.o Pawn.o GraphMap.o Tile.o TiledMap.o Vec2D.o RenderedObject.o FileManager.o HUDElement.o HUD.o RenderManager.o GridMap.o WalkNode.o RunAwayNode.o GameManager.o isid.o $(LIBS)
 
 clean:
 	@echo "Removing object files and executable"

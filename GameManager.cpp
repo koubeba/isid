@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "GameManager.h"
 
+#include "Tubaman.h"
 
 
 GameManager::GameManager(RenderManager* _renderManager, FileManager* _fileManager) {
@@ -17,7 +18,7 @@ void GameManager::initPlayer() {
 
 void GameManager::initEnemies() {
 	enemies = std::vector<Enemy*>();
-	Enemy* enemy = new Enemy(fileManager->getSprite("tubaman"));
+	Enemy* enemy = new Tubaman(fileManager->getSprite("tubaman"));
 	enemy->setPosition(Vec2D(0, 5));
 	enemy->initializeBehaviorTree(&player, &gmap, &map);
 	enemies.push_back(enemy);
