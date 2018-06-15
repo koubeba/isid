@@ -19,6 +19,7 @@ void GameManager::initEnemies() {
 	enemies = std::vector<Enemy*>();
 	Enemy* enemy = new Enemy(fileManager->getSprite("tubaman"));
 	enemy->setPosition(Vec2D(0, 5));
+	enemy->initializeBehaviorTree(&player, &gmap, &map);
 	enemies.push_back(enemy);
 }
 
@@ -73,7 +74,7 @@ void GameManager::setGameState(GameState _gameState) {
 
 void GameManager::loop(sf::RenderWindow& _window) {
 	player.update(map);
-	enemies[0]->findDir(player, gmap, map);
+	enemies[0]->update(player);
 	hud->update(player);
 
 	map.render(_window);

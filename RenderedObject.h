@@ -15,14 +15,13 @@ protected:
 public:
 	RenderedObject();
 	RenderedObject(sf::Sprite* sprite);
-	void render(sf::RenderWindow& window);	
+	void render(sf::RenderWindow& window);
 	// the position is in GRID COORDINATES!!!
 	void setPosition(Vec2D _position);
 	Vec2D getPosition();
-	
+
 	void setTextureRect(int, int, int, int);
 	sf::IntRect getTextureRect();
 };
 
 #endif
-

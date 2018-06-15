@@ -8,6 +8,7 @@
 
 class Repeater: public DecoratorNode {
 public:
+  Repeater(BehavioralNode* child);
   Status processInit();
   Status processContinue();
 };

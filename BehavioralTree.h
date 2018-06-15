@@ -2,11 +2,12 @@
 #define BEHAVIORAL_TREE_H
 
 #include "CompositeNode.h"
+#include "Repeater.h"
 
 class BehavioralTree {
-  CompositeNode* masterNode;
+  Repeater* masterNode;
 public:
   BehavioralTree(CompositeNode* _masterNode);
-  void iterate();
+  virtual void iterate();
 };
 #endif

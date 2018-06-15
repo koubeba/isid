@@ -28,53 +28,16 @@ void SelectorNode::setNumber(int number) {
 }
 
 Status SelectorNode::processInit() {
-  std::cout << "Initialize the selector process." << i << "Setting to visited. Status: ";
-  switch (status) {
-    case RUNNING: std::cout << "running ";
-    break;
-    case SUCCESS: std::cout << "success ";
-    break;
-    case FAILURE: std::cout << "failure ";
-    break;
-  }
   std::cout << std::endl;
   visited = true;
   Status result = processChildren();
-
-  std::cout << "Result of selector's children process: ";
-  switch (result) {
-    case RUNNING: std::cout << "running ";
-    break;
-    case SUCCESS: std::cout << "success ";
-    break;
-    case FAILURE: std::cout << "failure ";
-    break;
-  }
   std::cout << std::endl;
   return result;
 }
 
 Status SelectorNode::processContinue() {
-  std::cout << "Continue the selector process." << i << " Status: ";
-  switch (status) {
-    case RUNNING: std::cout << "running ";
-    break;
-    case SUCCESS: std::cout << "success ";
-    break;
-    case FAILURE: std::cout << "failure ";
-    break;
-  }
   std::cout << std::endl;
   Status result= processChildren();
-  std::cout << "Result of selector's children process: ";
-  switch (result) {
-    case RUNNING: std::cout << "running ";
-    break;
-    case SUCCESS: std::cout << "success ";
-    break;
-    case FAILURE: std::cout << "failure ";
-    break;
-  }
   std::cout << std::endl;
   return result;
 }

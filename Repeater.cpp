@@ -1,5 +1,9 @@
 #include "Repeater.h"
 
+Repeater::Repeater(BehavioralNode* child): DecoratorNode(child) {
+  
+}
+
 Status Repeater::processInit() {
   visited = false;
   Status result;
