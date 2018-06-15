@@ -7,8 +7,6 @@ WaitNode::WaitNode(): LeafNode() {
 
 Status WaitNode::processInit() {
   visited = false;
-
-std::cout << "Wait" << std::endl;
   // just wait
 
   status = SUCCESS;

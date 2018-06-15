@@ -1,5 +1,6 @@
 #include "Cymbalman.h"
 
+#include "RandomSelectorNode.h"
 #include "SelectorNode.h"
 #include "WalkNode.h"
 #include "RunAwayNode.h"
@@ -11,17 +12,10 @@ Cymbalman::Cymbalman(sf::Sprite* sprite): Enemy(sprite) {
 
 void Cymbalman::initializeBehaviorTree(Player* player, GraphMap* gmap, TiledMap* map) {
   // create a selector master node //
-  SelectorNode* masterNode = new SelectorNode();
-
-  // add a run away node to a mster Node
-  RunAwayNode* runAwayNode = new RunAwayNode(player, this, gmap, map);
-  masterNode->addChild(runAwayNode);
-
+  RandomSelectorNode* masterNode = new RandomSelectorNode();
   // add a walk node to a master node
   WalkNode* walkNode = new WalkNode(player, this, gmap, map);
   masterNode->addChild(walkNode);
-
-
 
   // add a wait node to a master node
   WaitNode* waitNode = new WaitNode();

@@ -3,6 +3,7 @@
 #include "GameManager.h"
 
 #include "Tubaman.h"
+#include "Cymbalman.h"
 
 
 GameManager::GameManager(RenderManager* _renderManager, FileManager* _fileManager) {
@@ -20,6 +21,11 @@ void GameManager::initEnemies() {
 	enemies = std::vector<Enemy*>();
 	Enemy* enemy = new Tubaman(fileManager->getSprite("tubaman"));
 	enemy->setPosition(Vec2D(0, 5));
+	enemy->initializeBehaviorTree(&player, &gmap, &map);
+	enemies.push_back(enemy);
+
+	enemy = new Cymbalman(fileManager->getSprite("cymbalman"));
+	enemy->setPosition(Vec2D(0, 10));
 	enemy->initializeBehaviorTree(&player, &gmap, &map);
 	enemies.push_back(enemy);
 }
@@ -76,6 +82,7 @@ void GameManager::setGameState(GameState _gameState) {
 void GameManager::loop(sf::RenderWindow& _window) {
 	player.update(map);
 	enemies[0]->update(player);
+	enemies[1]->update(player);
 	hud->update(player);
 
 	map.render(_window);
