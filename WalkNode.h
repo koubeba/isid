@@ -11,8 +11,12 @@ class WalkNode: public LeafNode {
   Enemy* enemy;
   GraphMap* gmap;
   TiledMap* map;
+
+  int tooFarAway, tooClose;
 public:
   WalkNode(Player* _player, Enemy* _enemy, GraphMap* _gmap, TiledMap* _map);
+  WalkNode(Player* _player, Enemy* _enemy, GraphMap* _gmap, TiledMap* _map, int _far, int _close);
+
   Status processInit();
   Status processContinue();
 };

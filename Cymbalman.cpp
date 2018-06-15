@@ -14,7 +14,7 @@ void Cymbalman::initializeBehaviorTree(Player* player, GraphMap* gmap, TiledMap*
   // create a selector master node //
   RandomSelectorNode* masterNode = new RandomSelectorNode();
   // add a walk node to a master node
-  WalkNode* walkNode = new WalkNode(player, this, gmap, map);
+  WalkNode* walkNode = new WalkNode(player, this, gmap, map, 30, 1);
   masterNode->addChild(walkNode);
 
   // add a wait node to a master node
