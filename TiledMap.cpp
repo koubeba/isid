@@ -115,6 +115,10 @@ int TiledMap::countAliveNeighbours(int x, int y){
     return count;
 }
 
+int TiledMap::countAliveNeighbours( Vec2D position ){
+    return countAliveNeighbours(position.x, position.y);
+}
+
 void TiledMap::doSimulationStep(int starvationLimit, int overpopulationLimit, int birthThreshold){
     Vec2D mapsize = GridMap::getSize();
     bool** newMap = new bool*[(int)mapsize.x];
@@ -161,26 +165,13 @@ void TiledMap::generate(const char* biome, Player* player,std::vector<Enemy*>& e
 	Json::Value values;
 	reader.parse(ifs, values);
 
-    int density, groupity;
+    int density, smoothness, item_count;
     density = values["density"].asInt();
-    groupity = values["groupity"].asInt();
+    smoothness = values["smoothness"].asInt();
+    item_count = values["item_count"].asInt();
 
     Vec2D mapsize = GridMap::getSize();
-    float chanceToStartAlive = 0.45f;
-
-    /*
-    tiles[4][2].setTileType(OBSTACLE);
-    tiles[6][6].setTileType(OBSTACLE);
-    tiles[12][3].setTileType(OBSTACLE);
-	tiles[14][12].setTileType(OBSTACLE);
-
-    tiles[8][7].setTileType(CHEST);
-
-    items.push_back( new Item(10, 10, HPOTION) );
-    items.push_back( new Item(12, 10, MPOTION) );
-    items.push_back( new Item(13, 9, HPOTION) );
-    items.push_back( new Item(13, 9, WEAPON) );
-    */
+    float chanceToStartAlive = density/100.0f;
 
     time_t tt;
     srand( time(&tt) );
@@ -191,8 +182,11 @@ void TiledMap::generate(const char* biome, Player* player,std::vector<Enemy*>& e
         }
     }
 
-    std::vector<Tile*> free_tiles;
+    for(int i=0; i<smoothness; ++i){
+        doSimulationStep(3, 10, 4);
+    }
 
+    std::vector<Tile*> free_tiles;
     Vec2D size = GridMap::getSize();
     for(int i=0; i<size.x; i++){
         for(int j=0; j<size.y; j++){
@@ -202,27 +196,37 @@ void TiledMap::generate(const char* biome, Player* player,std::vector<Enemy*>& e
     }
 
     std::vector<Tile*>::iterator it;
-/*
-    int obstacle_num = random( 13, 15 );
 
-    for(int i=0; i<obstacle_num; i++){
-        it = free_tiles.begin();
-        int temp = random( 0, free_tiles.size() );
-        for(int j=0; j<temp; j++) it++;
-        (*it)->setTileType(OBSTACLE);
-        free_tiles.erase(it);
-    }
-*/
     int player_pos = random(0, free_tiles.size());
     it = free_tiles.begin();
     for ( int i=0; i<player_pos; i++) it++;
     player->setPosition( (*it)->getPosition() );
+    free_tiles.erase(it);
+
+    std::vector<Tile*> treasure_tiles;
+    for(it = free_tiles.begin(); it!=free_tiles.end(); ++it){
+        if( countAliveNeighbours( (*it)->getPosition().x, (*it)->getPosition().y ) > 4  && countAliveNeighbours( (*it)->getPosition() ) < 9) treasure_tiles.push_back( (*it) );
+    }
+
+    for(int i=0; i<item_count; ++i){
+        do{
+          int item_pos = random(0, treasure_tiles.size());
+            it = treasure_tiles.begin();
+            for ( int i=0; i<item_pos; i++) it++;
+        }
+        while( it != treasure_tiles.begin() && distance((*it)->getPosition(), player->getPosition()) < 7 );
+        items.push_back(new Item((*it)->getPosition().x, (*it)->getPosition().y, ItemType( random(0, 3) )) );
+    }
 
     for (std::vector<Enemy*>::iterator itr = enemies.begin(); itr != enemies.end(); ++itr) {
-      int enemy_pos = random(0, free_tiles.size());
-      it = free_tiles.begin();
-      for ( int i=0; i<enemy_pos; i++) it++;
-      (*itr)->setPosition( (*it)->getPosition() );
+      do{
+          int enemy_pos = random(0, free_tiles.size());
+            it = free_tiles.begin();
+            for ( int i=0; i<enemy_pos; i++) it++;
+            (*itr)->setPosition( (*it)->getPosition() );
+        }
+        while(distance((*itr)->getPosition(), player->getPosition()) < 7);
+      free_tiles.erase(it);
     }
 
 }

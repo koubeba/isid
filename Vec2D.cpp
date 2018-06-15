@@ -27,3 +27,7 @@ Vec2D Vec2D::operator/(Vec2D other) {
 		return Vec2D(this->x/other.x, this->y/other.y);
 	return other;
 }
+
+float distance(const Vec2D& a, const Vec2D& b) {
+    return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+}
