@@ -77,7 +77,3 @@ Direction Pawn::getDirection(){
 bool Pawn::Alive(){
     return alive;
 }
-
-float distance(const Vec2D& a, const Vec2D& b) {
-    return sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
-}

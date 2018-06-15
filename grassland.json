@@ -1,6 +1,7 @@
 {
     "density":32,
     "smoothness":2,
+    "item_count":3,
     "sprites":
     [
         {"name":"floor", "path":"sprites/biomes/grassland/grass.png"},
