@@ -26,7 +26,6 @@ class TiledMap {
 
 
 public:
-    void doSimulationStep(int starvationLimit, int overpopulationLimit, int birthThreshold);
     TiledMap();
     TileType getTileType(int x, int y);
     TileType getTileType( Vec2D position);
