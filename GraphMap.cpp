@@ -116,7 +116,9 @@ bool isGoal(Node& node, Node& goal){
 }
 
 float manhattanDist(Node& node, Node& goal){
-    return abs(node.position.x - goal.position.x) + abs(node.position.y - goal.position.y);
+    //return abs(node.position.x - goal.position.x) + abs(node.position.y - goal.position.y);
+    return ((double)sqrt ((node.position.x - goal.position.x)*(node.position.x - goal.position.x) 
+        + (node.position.y - goal.position.y)*(node.position.y - goal.position.y)));
 }
 
 int GraphMap::aStar(TiledMap* map, Node* start, Node* finish) {
@@ -133,6 +135,10 @@ int GraphMap::aStar(TiledMap* map, Node* start, Node* finish) {
     for(int i = 0; i < width; i++){
         for(int j = 0; j < height; j++){
             closedList[i][j] = false;
+            nodes[i][j].f = FLT_MAX;
+            nodes[i][j].g = FLT_MAX;
+            nodes[i][j].h = FLT_MAX;
+            nodes[i][j].parent = nullptr;
         }
     }
 
@@ -149,11 +155,16 @@ int GraphMap::aStar(TiledMap* map, Node* start, Node* finish) {
 
     int x,y;
     Node* neighbour;
+    int iter = 0;
+    Node* secondLoopNode;
 
     while(!openList.empty()){
+        iter++;
         pPair p = *openList.begin();
         //
         openList.erase(openList.begin());
+
+        if(iter == 2){secondLoopNode = p.second; }
 
         x = p.second->position.x;
         y = p.second->position.y;
@@ -270,10 +281,9 @@ int GraphMap::aStar(TiledMap* map, Node* start, Node* finish) {
         }
     }
     if (foundDest == false) return -1;
-    
-    int difX = finish->position.x - finish->parent->position.x;
-    int difY = finish->position.y - finish->parent->position.y;
 
+    int difX = -finish->position.x + finish->parent->position.x;
+    int difY = -finish->position.y + finish->parent->position.y;
     if(difX > 0)   { return RIGHT; }
     if(difX < 0)    { return LEFT;  }
     if(difY > 0)   { return DOWN;  }

@@ -48,8 +48,7 @@ void Enemy::findDir(Pawn& player, GraphMap& gmap, TiledMap& map){
     Node enemyNode = gmap.findNode(this->getPosition().x, this->getPosition().y);
     Direction dire;
     if(!moving){
-        int dir = gmap.aStar(&map, &enemyNode, &playerNode);
-        //Direction dire = RIGHT;
+        int dir = gmap.aStar(&map, &playerNode, &enemyNode);
         Vec2D pos = this->getPosition();
         //std::cout << dir << "\n";
         dire = static_cast<Direction>(dir);
