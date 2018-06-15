@@ -2,6 +2,7 @@
 
 #include "SelectorNode.h"
 #include "WalkNode.h"
+#include "RunAwayNode.h"
 #include "WaitNode.h"
 
 Enemy::Enemy() {
@@ -26,7 +27,7 @@ void Enemy::runAway(Pawn& player, GraphMap& gmap, TiledMap& map) {
   Node enemyNode = gmap.findNode(this->getPosition().x, this->getPosition().y);
   Direction dire;
   if(!moving){
-      int dir = gmap.aStar(&map, &playerNode, &enemyNode);
+      int dir = gmap.aStar(&map, &enemyNode, &playerNode);
       //Direction dire = RIGHT;
       Vec2D pos = this->getPosition();
       //std::cout << dir << "\n";
@@ -67,13 +68,20 @@ void Enemy::initializeBehaviorTree(Player* player, GraphMap* gmap, TiledMap* map
   // create a selector master node //
   SelectorNode* masterNode = new SelectorNode();
 
+  // add a run away node to a mster Node
+  RunAwayNode* runAwayNode = new RunAwayNode(player, this, gmap, map);
+  masterNode->addChild(runAwayNode);
+
   // add a walk node to a master node
   WalkNode* walkNode = new WalkNode(player, this, gmap, map);
   masterNode->addChild(walkNode);
 
+
+
   // add a wait node to a master node
   WaitNode* waitNode = new WaitNode();
   masterNode->addChild(waitNode);
+
 
   behavioralTree = new BehavioralTree(masterNode);
 }
