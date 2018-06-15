@@ -22,6 +22,7 @@ class TiledMap {
 
     //cellular automaton functions
     int countAliveNeighbours(int x, int y);
+    void doSimulationStep(int starvationLimit, int overpopulationLimit, int birthThreshold);
 
 
 public:
