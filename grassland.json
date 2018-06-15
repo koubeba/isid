@@ -1,11 +1,12 @@
 {
-    "density":10,
-    "groupity":20,
+    "density":32,
+    "smoothness":2,
+    "item_count":3,
     "sprites":
     [
         {"name":"floor", "path":"sprites/biomes/grassland/grass.png"},
         {"name":"obstacle", "path":"sprites/biomes/grassland/tree.png"},
-        {"name":"liquid", "path":"player.gif"},
+        {"name":"liquid", "path":"sprites/biomes/grassland/liquid.png"},
         {"name":"chest", "path":"sprites/biomes/grassland/chest.png"}
     ]
 }
